@@ -2,7 +2,7 @@
 
 module Haste.Graphics.WebGL.ProgramsShaders where
 
-import Haste.DOM
+--import Haste.DOM
 import Haste.Foreign
 import Haste.Prim
 

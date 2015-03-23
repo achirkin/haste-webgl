@@ -2,9 +2,9 @@
 
 module Haste.Graphics.WebGL.ViewClip where
 
-import Haste.DOM
+--import Haste.DOM
 import Haste.Foreign
-import Haste.Prim
+--import Haste.Prim
 
 import Haste.Graphics.WebGL.Types
 

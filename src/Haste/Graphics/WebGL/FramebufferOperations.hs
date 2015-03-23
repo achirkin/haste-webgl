@@ -3,9 +3,7 @@
 module Haste.Graphics.WebGL.FramebufferOperations where
 
 import Data.Bits
-import Haste.DOM
 import Haste.Foreign
-import Haste.Prim
 
 import Haste.Graphics.WebGL.Types
 
@@ -43,6 +41,7 @@ instance Bits ClearBit where
   testBit = undefined
   bit = undefined
   popCount = undefined
+  bitSizeMaybe = undefined
 
 clear::Context->ClearBit->IO ()
 clear = ffi "(function(ctx, mask) {ctx.clear(mask);})"

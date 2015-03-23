@@ -1,0 +1,20 @@
+dist
+cabal-dev
+*.o
+*.hi
+*.chi
+*.chs.h
+.virtualenv
+.hsenv
+.cabal-sandbox/
+cabal.sandbox.config
+cabal.config
+
+# eclipse stuff
+.dist-buildwrapper/
+.project
+.settings/
+docs/
+
+# my own stuff
+*.nb

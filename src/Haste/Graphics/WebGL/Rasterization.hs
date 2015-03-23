@@ -2,9 +2,8 @@
 
 module Haste.Graphics.WebGL.Rasterization where
 
-import Haste.DOM
 import Haste.Foreign
-import Haste.Prim
+
 
 import Haste.Graphics.WebGL.Types
 

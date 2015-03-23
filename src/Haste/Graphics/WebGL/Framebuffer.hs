@@ -2,8 +2,8 @@
 
 module Haste.Graphics.WebGL.Framebuffer where
 
-import Data.Bits
-import Haste.DOM
+--import Data.Bits
+--import Haste.DOM
 import Haste.Foreign
 import Haste.Prim
 import System.IO.Unsafe (unsafePerformIO)
@@ -79,6 +79,7 @@ instance Pack FramebufferAttachmentPName where
 instance Unpack FramebufferAttachmentPName where
   unpack = unpack . fromEnum
 
+{-# NOINLINE noFramebuffer #-}
 noFramebuffer::Framebuffer
 noFramebuffer = unsafePerformIO (ffi "(function() {return null;})"::IO Framebuffer)
 

@@ -1,13 +1,15 @@
-{-# LANGUAGE OverloadedStrings, GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings, GeneralizedNewtypeDeriving, FlexibleInstances #-}
 
 module Haste.Graphics.WebGL.Buffer where
 
-import Haste.DOM
 import Haste.Foreign
 import Haste.Prim
 
-import Haste.JSArray.Typed
 import Haste.Graphics.WebGL.Types
+
+import qualified Foreign as F
+
+instance Unpack (F.Ptr F.Word8)
 
 data BufferTarget = ArrayBufferTarget | ElementArrayBufferTarget
 
@@ -68,14 +70,18 @@ bufferDataSized::Context->BufferTarget->Int->BufferUsage->IO ()
 bufferDataSized = ffi "(function(ctx, target, size, usage) {ctx.bufferData(target, size, usage);})"
 
 -- really I think we can pass in a plain ArrayBuffer as well, but...
-bufferData::TypedArray a=>Context->BufferTarget->a->BufferUsage->IO ()
-bufferData = ffi "(function(ctx, target, data, usage) {ctx.bufferData(target, data, usage);})"
+bufferData::Context->BufferTarget->F.Ptr a->BufferUsage->IO ()
+bufferData ctx bt ptr =
+    ffi "(function(ctx, target, data, usage) {ctx.bufferData(target, data['b'], usage);})" ctx bt ptr'
+        where ptr' = F.castPtr ptr :: F.Ptr F.Word8
 
-bufferData'::TypedArray a=>Context->BufferTarget->BufferUsage->a->IO ()
+bufferData'::Context->BufferTarget->BufferUsage->F.Ptr a->IO ()
 bufferData' ctx targ usage dat = bufferData ctx targ dat usage
 
-bufferSubData::TypedArray a=>Context->BufferTarget->Int->a->IO ()
-bufferSubData = ffi "(function(ctx, target, offset, data) {ctx.bufferSubData(target, offset, data);})"
+bufferSubData::Context->BufferTarget->Int->F.Ptr a->IO ()
+bufferSubData ctx bt i ptr =
+    ffi "(function(ctx, target, offset, data) {ctx.bufferSubData(target, offset, data['b']);})" ctx bt i ptr'
+        where ptr' = F.castPtr ptr :: F.Ptr F.Word8
 
 createBuffer::Context->IO Buffer
 createBuffer = ffi "(function(ctx) {return ctx.createBuffer();})"

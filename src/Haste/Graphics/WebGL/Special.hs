@@ -2,7 +2,6 @@
 
 module Haste.Graphics.WebGL.Special where
 
-import Haste.DOM
 import Haste.Foreign
 import Haste.Prim
 

@@ -2,7 +2,6 @@
 
 module Haste.Graphics.WebGL.Types where
 
-import Haste.DOM
 import Haste.Foreign
 import Haste.Prim
 
@@ -16,6 +15,7 @@ instance Enum StencilFace where
   toEnum 0x404 = Front
   toEnum 0x405 = Back
   toEnum 0x408 = FrontAndBack
+  toEnum _ = undefined
 
 instance Pack StencilFace where
   pack = toEnum . pack

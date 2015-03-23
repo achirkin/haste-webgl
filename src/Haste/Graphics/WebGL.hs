@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings, FlexibleInstances #-}
 
 module Haste.Graphics.WebGL (module Haste.Graphics.WebGL, module X)
        where
@@ -7,7 +7,6 @@ import Haste.DOM
 import Haste.Foreign
 import Haste.Prim
 
-import Haste.JSArray.Typed as X
 import Haste.Graphics.WebGL.Types as X
 import Haste.Graphics.WebGL.Buffer as X
 import Haste.Graphics.WebGL.Framebuffer as X
@@ -19,6 +18,9 @@ import Haste.Graphics.WebGL.Special as X
 import Haste.Graphics.WebGL.Texture as X
 import Haste.Graphics.WebGL.UniformsAttributes as X
 import Haste.Graphics.WebGL.ViewClip as X
+
+import qualified Foreign as F
+--instance Unpack (F.Ptr F.Word8)
 
 getContext::Elem->String->IO Context
 getContext = ffi "(function(elt, name) {return elt.getContext(name);})"
@@ -41,5 +43,5 @@ drawArrays = ffi "(function(ctx, mode, first, count) {ctx.drawArrays(mode, first
 drawElements::Context->DrawMode->Int->ElementType->Int->IO ()
 drawElements = ffi "(function(ctx, mode, count, type, offset) {ctx.drawElements(mode, count, type, offset);})"
 
-readPixels::TypedArray a=>Context->Int->Int->Int->Int->a->IO ()
+readPixels:: Context->Int->Int->Int->Int->F.Ptr F.Word8->IO ()
 readPixels = ffi "(function(ctx, x, y, width, height, pixels) {ctx.readPixels(x, y, width, height, ctx.RGBA, ctx.UNSIGNED_BYTE, pixels);})"
