@@ -199,7 +199,7 @@ instance Enum GLParameter where
   toEnum 0x8009 = BlendEquationRGB
   toEnum 0x80cb = BlendSrcAlpha
   toEnum 0x80c9 = BlendSrcRGB
-  toEnum 0x8009 = BlendParam
+--  toEnum 0x8009 = BlendParam
   toEnum 0x8005 = BlendColor
   toEnum 0xc22 = ColorClearValue
   toEnum 0xc23 = ColorWritemask

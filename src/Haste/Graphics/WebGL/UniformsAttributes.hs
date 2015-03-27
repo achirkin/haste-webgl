@@ -42,21 +42,26 @@ newtype UniformLocation = UniformLocation JSAny deriving (Pack, Unpack)
 
 
 -- webgl doesn't support fixed
-data VertexAttribType = Byte | Short | UnsignedByte | UnsignedShort | FloatVAType
+data VertexAttribType = BYTE | UNSIGNED_BYTE | SHORT | UNSIGNED_SHORT | INT | UNSIGNED_INT | FLOAT 
 
 instance Enum VertexAttribType where
-  fromEnum Byte = 0x1400
-  fromEnum Short = 0x1402
-  fromEnum UnsignedByte = 0x1401
-  fromEnum UnsignedShort = 0x1403
-  fromEnum FloatVAType = 0x1406
-
-  toEnum 0x1400 = Byte
-  toEnum 0x1402 = Short
-  toEnum 0x1401 = UnsignedByte
-  toEnum 0x1403 = UnsignedShort
-  toEnum 0x1406 = FloatVAType
-  toEnum _ = undefined
+    fromEnum BYTE           = 0x1400
+    fromEnum UNSIGNED_BYTE  = 0x1401
+    fromEnum SHORT          = 0x1402
+    fromEnum UNSIGNED_SHORT = 0x1403
+    fromEnum INT            = 0x1404
+    fromEnum UNSIGNED_INT   = 0x1405
+    fromEnum FLOAT          = 0x1406
+    
+    
+    toEnum 0x1400 = BYTE
+    toEnum 0x1401 = UNSIGNED_BYTE
+    toEnum 0x1402 = SHORT
+    toEnum 0x1403 = UNSIGNED_SHORT
+    toEnum 0x1404 = INT
+    toEnum 0x1405 = UNSIGNED_INT
+    toEnum 0x1406 = FLOAT
+    toEnum _ = undefined
 
 instance Pack VertexAttribType where
   pack = toEnum . pack
