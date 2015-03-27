@@ -10,3 +10,5 @@ https://www.khronos.org/files/webgl/webgl-reference-card-1_0.pdf .
 
 A couple of examples from "Learning WebGL" (http://learningwebgl.com/)
 are available in the examples/ folder.
+
+A compiled example could be found in folder "together"
